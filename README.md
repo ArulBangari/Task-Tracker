@@ -11,7 +11,8 @@ Retrieves all tasks. Pagination may be added in the future.
 **Query Parameters:**
 
 - dueDate: Filter tasks by due date (YYYY-MM-DD)
-- priority: Filter taskes by priority level (1 - 10)
+- priority: Filter tasks by priority level (1 - 10)
+- user: Filter tasks by user
 
 **Responses:**
 
@@ -29,16 +30,19 @@ Retrieves a post with the given ID.
 
 ### **POST /task**
 
-Creates a new task with name, priority level, due date and unique ID, and adds it to database. The data is passed in the JSON body.
+Creates a new task with name, priority level, due date, unique ID and user, and adds it to database. The data is passed in the JSON body.
 
 **Request Body (JSON):**
 
 ```json
 {
   "id": "integer", // Unique task ID
-  "name": "string", // Task name
+  "title": "string", // Task name
+  "description": "string", // Task description
   "priority": "int", // Task priority (1 - 10)
-  "dueDate": "string" // Due date in YYYY-MM-DD format
+  "dueDate": "string", // Due date in YYYY-MM-DD format
+  "user": "string", // The user who created the task
+  "completed": "boolean" // Whether the task is completed or not
 }
 ```
 
@@ -48,7 +52,7 @@ Creates a new task with name, priority level, due date and unique ID, and adds i
 - 409 CONFLICT - ID already exists
 - 400 BAD REQUEST - Missing or invalid input
 
-### **PATCH /task**
+### **PATCH /task/:id**
 
 Updates an existing task with the data provided in the JSON request body.
 
